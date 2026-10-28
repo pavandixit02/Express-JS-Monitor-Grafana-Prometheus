@@ -152,7 +152,7 @@ Now your Express app is fully **monitored with Grafana + Prometheus** 🎯
 ---
 
 ## 🌟 Author
-Made with ❤️ by **Farzeen Ali**
+Made with ❤️ by **Pavan Kumar Dixit**
 
 ---
 
