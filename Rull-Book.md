@@ -21,6 +21,7 @@ cd express-prometheus-grafana
 npm init -y
 npm install express prom-client
 ```
+### Application Running Locally
 
 ---
 
@@ -72,11 +73,27 @@ app.listen(PORT, "0.0.0.0", () => {
 });
 ```
 
+### Application Server Implementation
+
+![Node.js server implementation](./server_js.png)
+
+
 Run the server:
 
 ```bash
 npm start
 ```
+### Terminal and Setup
+
+![Terminal commands used during setup](./Terminal-Commands.png)
+
+### Application Running Locally
+
+![Node.js application running locally](./run-localhost.png)
+
+### Node.js Application with Metrics
+
+![Node.js application with metrics](./run-localhost-with-matric.png)
 
 👉 Open in browser: [http://localhost:3001/metrics](http://localhost:3001/metrics) to see Prometheus metrics.
 
@@ -112,6 +129,15 @@ Check targets:
 
 👉 Open [http://localhost:9090/classic/targets](http://localhost:9090/classic/targets) and verify **express-app** status is **UP** ✅
 
+
+### Prometheus Configuration
+
+![Prometheus configuration](./Config_file-prometheus_yml.png)
+
+### Prometheus Metrics Output
+
+![Prometheus output](./Output-prometheus.png)
+
 ---
 
 ## ⚡ Step 4: Visualize Metrics in Grafana
@@ -131,6 +157,10 @@ sum by (instance, method) (rate(http_request_duration_seconds_count[5m]))
 6. Under **Standard Options > Unit**, select `requests/sec (rps)`
 
 🎉 Now you can see **real-time Express app metrics** in Grafana!
+
+### Grafana Dashboard
+
+![Grafana dashboard output](./Output-Grafana.png)
 
 ---
 
