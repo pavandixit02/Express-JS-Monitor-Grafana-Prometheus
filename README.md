@@ -1,43 +1,46 @@
-# Node.js Monitoring with Prometheus and Grafana
+# Node.js Observability with Prometheus & Grafana
 
-A hands-on monitoring project that demonstrates how to observe a Node.js application using **Prometheus** and **Grafana**. The application exposes monitoring metrics, Prometheus collects the metrics, and Grafana presents them in dashboards for easier analysis.
+> **Project type:** Application Monitoring · Observability · Node.js
 
-> For the complete implementation steps and configuration details, follow **[Rull-Book.md](./Rull-Book.md)**. This README provides a clear project overview and links to the included evidence.
+This project explores how to monitor a Node.js application using **Prometheus** and **Grafana**. It brings application metrics into a monitoring workflow: the application exposes measurable information, Prometheus collects it, and Grafana helps make the data easier to understand through dashboards.
 
-## Project Overview
+The goal is to build practical familiarity with the core concepts behind application observability—not just running an application, but also learning how to inspect its behavior.
 
-This project connects a Node.js application to a monitoring stack so application activity and metrics can be collected and visualized.
+## At a Glance
 
-- **Node.js** runs the application and exposes metrics for monitoring.
-- **Prometheus** collects and stores the metrics based on its scrape configuration.
-- **Grafana** uses Prometheus as a data source to visualize the collected metrics in dashboards.
-
-## Technology Stack
-
-| Technology | Role |
+| Component | Responsibility |
 |---|---|
-| **Node.js** | Runs the application being monitored |
-| **Prometheus** | Collects and stores application metrics |
-| **Grafana** | Visualizes metrics through dashboards |
-| **Prometheus configuration** | Defines the monitoring target and collection settings |
+| **Node.js** | Runs the application and provides metrics for monitoring |
+| **Prometheus** | Collects and stores metrics as time-series data |
+| **Grafana** | Connects to the metrics source and presents data visually |
+| **npm** | Manages the Node.js application's dependencies |
 
-## Architecture
+## Monitoring Flow
 
 ```text
-                  Node.js Application
-                         |
-                         | Exposes metrics
-                         v
-                     Prometheus
-                  Scrapes and stores
-                         |
-                         | Data source
-                         v
-                      Grafana
-                  Dashboards / Panels
+┌──────────────────────┐
+│   Node.js Service    │
+│ Application + Metrics│
+└──────────┬───────────┘
+           │ Metrics endpoint
+           ▼
+┌──────────────────────┐
+│     Prometheus       │
+│ Collects and stores  │
+│   time-series data   │
+└──────────┬───────────┘
+           │ Data source
+           ▼
+┌──────────────────────┐
+│       Grafana        │
+│ Dashboards, panels,  │
+│     visual insights  │
+└──────────────────────┘
 ```
 
-## Project Structure
+**In simple terms:** Node.js produces the information, Prometheus gathers it, and Grafana turns it into a view that is easier to explore.
+
+## Repository Structure
 
 ```text
 .
@@ -54,67 +57,50 @@ This project connects a Node.js application to a monitoring stack so application
 └── Terminal-Commands.png
 ```
 
-## How It Works
+*The image files are listed above only because they are part of the repository structure. This README intentionally does not display, embed, or link to images.*
 
-1. **Run the Node.js application.** The application provides the service and its monitoring metrics.
-2. **Configure Prometheus.** Prometheus is set up to collect metrics from the intended application endpoint.
-3. **Collect metrics.** Prometheus periodically scrapes the configured target and stores the results.
-4. **Connect Grafana.** Grafana uses Prometheus as its data source.
-5. **Visualize the results.** Dashboards and panels display the metrics, making application behavior easier to inspect.
+## Project Workflow
 
-The exact setup and configuration details are documented in **[Rull-Book.md](./Rull-Book.md)**.
+1. **Run the Node.js service** — the application provides the endpoint or metrics used for monitoring.
+2. **Configure Prometheus** — define the target and collection settings appropriate to the application.
+3. **Collect metrics** — Prometheus periodically scrapes the configured target and stores the results.
+4. **Connect Grafana** — configure Prometheus as a data source.
+5. **Explore the data** — use Grafana dashboards and panels to review the available metrics.
 
-## Project Evidence
+The precise endpoints, metric names, ports, and configuration are specific to this project. Use **[Rull-Book.md](./Rull-Book.md)** as the source of truth for the implementation details.
 
-### Application Running Locally
+## What This Project Demonstrates
 
-![Node.js application running locally](./run-localhost.png)
+- How application monitoring fits into the software lifecycle.
+- How a Node.js service can expose metrics for collection.
+- The role of Prometheus scrape targets and time-series storage.
+- How Grafana uses a metrics data source to create dashboards.
+- How application telemetry can help make service behavior more visible.
 
-### Node.js Application with Metrics
+## Why Prometheus and Grafana?
 
-![Node.js application with metrics](./run-localhost-with-matric.png)
+**Prometheus** is designed to collect and query time-series metrics. It helps answer questions about values over time, provided the application exposes the relevant metrics.
 
-### Application Server Implementation
+**Grafana** provides dashboards and visualizations for data from supported sources, including Prometheus. It helps make trends and changes easier to inspect.
 
-![Node.js server implementation](./server_js.png)
+Together, they form a commonly used open-source monitoring stack for learning and observing application behavior.
 
-### Prometheus Configuration
+## Main Reference
 
-![Prometheus configuration](./Config_file-prometheus_yml.png)
+The repository includes **[Rull-Book.md](./Rull-Book.md)** for the detailed setup and configuration used in this project. Follow that document for the exact implementation rather than assuming default ports, endpoints, or metric names.
 
-### Prometheus Metrics Output
+## Potential Next Steps
 
-![Prometheus output](./Output-prometheus.png)
+- Track request volume, response time, and error rates when the application exposes those metrics.
+- Create focused dashboards for application health and runtime behavior.
+- Define alerts for useful thresholds and service-health conditions.
+- Document metric names, labels, and their meaning.
+- Expand the monitoring setup to additional services as the project grows.
 
-### Grafana Dashboard
+## Key Takeaway
 
-![Grafana dashboard output](./Output-Grafana.png)
-
-### Terminal and Setup
-
-![Terminal commands used during setup](./Terminal-Commands.png)
-
-## Key Learning Outcomes
-
-- Understanding the role of application metrics in monitoring.
-- Instrumenting a Node.js application for metrics collection.
-- Understanding how Prometheus scrapes and stores metrics.
-- Connecting Grafana to Prometheus as a data source.
-- Visualizing application metrics with Grafana dashboards.
-- Following a monitoring workflow from application instrumentation to visualization.
-
-## Configuration Reference
-
-For the full setup procedure, required packages, configuration contents, and run instructions, refer to **[Rull-Book.md](./Rull-Book.md)**. Use that document as the source of truth for the exact steps and configuration used in this project.
-
-## Future Improvements
-
-- Add more application and runtime metrics where useful.
-- Create dashboards for request rate, errors, and response time if those metrics are available.
-- Configure alerting for important thresholds.
-- Add service health checks and monitoring for deployment environments.
-- Document metric names, labels, and dashboard panels.
+This project connects **application instrumentation**, **metrics collection**, and **visual monitoring** into one workflow. It provides a practical foundation for understanding observability concepts that are useful in Cloud, DevOps, and site reliability engineering.
 
 ---
 
-**Project Focus:** Node.js · Prometheus · Grafana · Application Monitoring · Observability
+**Built for learning:** Node.js · Prometheus · Grafana · Metrics · Observability
